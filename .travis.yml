@@ -3,4 +3,4 @@ language: generic
 env:
 script:
   - curl https://sh.rustup.rs -sSf | sh -s -- -y
-  - source "${HOME}/.cargo/env" && cargo build && ulimit -c unlimited && ./target/debug/rustdebug ; ls /Users/travis/Library/Logs/DiagnosticReports ; cat /Users/travis/Library/Logs/DiagnosticReports/* ; ls /cores
+  - source "${HOME}/.cargo/env" && cargo build && ulimit -c unlimited && ./target/debug/rustdebug ; pid=$? ; lldb --core /cores/core.$pid --batch --one-line "bt"
