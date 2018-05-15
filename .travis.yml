@@ -3,4 +3,4 @@ language: generic
 env:
 script:
   - curl https://sh.rustup.rs -sSf | sh -s -- -y
-  - source "${HOME}/.cargo/env" && cargo build && ulimit -c unlimited && echo "cores before:" ; ls /cores ; ./target/debug/rustdebug ; pid=$? ; echo "cores after:" ; ls /cores ; lldb --core /cores/core.$pid --batch --one-line "bt"
+  - source "${HOME}/.cargo/env" && cargo build && ulimit -c unlimited && echo "cores before:" ; ls /cores ; ./target/debug/rustdebug ; echo "cores after:" ; ls /cores ; lldb --core /cores/* --batch --one-line "bt"
