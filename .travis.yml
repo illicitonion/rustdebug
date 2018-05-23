@@ -1,7 +1,11 @@
-os: osx 
-osx_image: xcode7.3
+os: linux
+osx_image: trusty
+sudo: required
 language: generic
 env:
 script:
   - curl https://sh.rustup.rs -sSf | sh -s -- -y
-  - source "${HOME}/.cargo/env" && cargo build && ulimit -c unlimited && echo "cores before:" ; ls /cores ; ./target/debug/rustdebug ; echo "cores after:" ; ls -lah /cores ; lldb --core /cores/* --batch --one-line "bt"
+  - source "${HOME}/.cargo/env" && cargo build
+  - ./target/debug/rustdebug ; echo $?
+  - ls -lah
+  - gdb ./target/debug/rustdebug core -ex "thread apply all bt" -ex "set pagination 0" -batch
