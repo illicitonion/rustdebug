@@ -4,6 +4,7 @@ sudo: required
 language: generic
 env:
 script:
+  - sudo apt-get install gdb
   - curl https://sh.rustup.rs -sSf | sh -s -- -y
   - source "${HOME}/.cargo/env" && cargo build
   - ./target/debug/rustdebug ; echo $?
