@@ -7,6 +7,6 @@ script:
   - sudo apt-get install gdb
   - curl https://sh.rustup.rs -sSf | sh -s -- -y
   - source "${HOME}/.cargo/env" && cargo build
-  - ./target/debug/rustdebug ; echo $?
+  - ulimit -c unlimited ; ./target/debug/rustdebug ; echo $?
   - ls -lah
   - gdb ./target/debug/rustdebug core -ex "thread apply all bt" -ex "set pagination 0" -batch
